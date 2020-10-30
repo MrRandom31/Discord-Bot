@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 
 // Set the prefix
-let prefix = "mmo ";
+let prefix = "mmo";
 
 client.on("ready", () => {
   console.log("I am ready!");

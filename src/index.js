@@ -1,3 +1,4 @@
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 const Discord = require("discord.js");
 const fs = require("fs");
 const { join } = require("path");
@@ -29,4 +30,15 @@ fs.readdir(join(__dirname, "commands"), (err, files) => {
   });
 });
 
+
+
 client.login(config.token);
+client.on('ready', () => {
+  client.user.setPresence({
+    status: 'online',
+    activity: {
+      name: 'mmo help',
+      type: 'PLAYING'
+    }
+  });
+});

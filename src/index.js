@@ -33,12 +33,3 @@ fs.readdir(join(__dirname, "commands"), (err, files) => {
 
 
 client.login(config.token);
-client.on('ready', () => {
-  client.user.setPresence({
-    status: 'online',
-    activity: {
-      name: 'mmo help',
-      type: 'PLAYING'
-    }
-  });
-});

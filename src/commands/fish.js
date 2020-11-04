@@ -1,7 +1,7 @@
-checker = require('../leveler.js');
-const sqlite3 = require('sqlite3').verbose();
+let checker = require('../leveler.js');
+let get_db = require("../data.js");
 exports.run = (client, message, args) => {
-    let db = new sqlite3.Database("./game.db");
+    let db = get_db('game.db');
     let user = db.get("SELECT * FROM users WHERE username = ?", [message.author.username], (err, row) => {
         if (err) {
             throw err;
@@ -12,7 +12,7 @@ exports.run = (client, message, args) => {
                 let fish = row['inv'].slice(0, test);
                 if (test === -1) {
                     let anum = num;
-                    let xp = Math.ceil(Math.random() * 10) * num;
+                    let xp = Math.ceil(Math.random() * 25) * num;
                     let sql = "UPDATE users SET xp = ?, inv = ? WHERE username = ?";
                     message.channel.send(`${message.author.username} caught ${num} fish\nEarned ${xp}xp`);
                     db.run(sql, [xp + row['xp'], [`${anum} fish` + row['inv'].slice(test + 4)], message.author.username], (err) => {
@@ -21,7 +21,7 @@ exports.run = (client, message, args) => {
                 }
                 else {
                     let anum = parseInt(fish) + num;
-                    let xp = Math.ceil(Math.random() * 10) * num;
+                    let xp = Math.ceil(Math.random() * 25) * num;
                     let sql = "UPDATE users SET xp = ?, inv = ? WHERE username = ?";
                     message.channel.send(`${message.author.username} caught ${num} fish\nEarned ${xp}xp`);
                     db.run(sql, [xp + row['xp'], [`${anum} fish` + row['inv'].slice(test + 4)], message.author.username], (err) => {

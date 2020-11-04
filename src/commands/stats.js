@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
-let sqlite3 = require('sqlite3').verbose();
+let get_db = require('../data.js');
 exports.run = (client, message, args) => {
-    let db = new sqlite3.Database('./game.db');
+    let db = get_db('game.db')
     let user = {};
     let users = db.get('SELECT * FROM users WHERE username = ?', message.author.username, (err, row) => {
         user[row] = row;

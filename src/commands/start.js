@@ -1,6 +1,6 @@
-let sqlite3 = require('sqlite3').verbose();
+let get_db = require('../data.js');
 exports.run = (client, message, args) => {
-    let db = new sqlite3.Database('./game.db');
+    let db = get_db('game.db');
     let classes = { '1': 'Mage', '2': 'Warrior', '3': 'Archer', '4': 'Assassin', '5': 'Healer' };
     let weapons = { '1': 'Basic Staff', '2': 'Rusty Sword', '3': 'Training Bow', '4': 'Rusty daggers', '5': 'Rotten Club' };
     let armors = { '1': 'Old Robes', '2': 'Rusty Iron Armor', '3': 'Old Cloak', '4': 'Old Cloack', '5': 'Coffee Stained Coat' };

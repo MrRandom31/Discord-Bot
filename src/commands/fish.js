@@ -1,12 +1,13 @@
+checker = require('../leveler.js');
 const sqlite3 = require('sqlite3').verbose();
 exports.run = (client, message, args) => {
     let db = new sqlite3.Database("./game.db");
-    let user = db.get("SELECT xp, inv FROM users WHERE username = ?", [message.author.username], (err, row) => {
+    let user = db.get("SELECT * FROM users WHERE username = ?", [message.author.username], (err, row) => {
         if (err) {
             throw err;
         } else {
             if (row != undefined) {
-                let num = Math.ceil(Math.random() * 2) + 1;
+                let num = Math.ceil(Math.random() * 5) + 1;
                 let test = row['inv'].search('fish');
                 let fish = row['inv'].slice(0, test);
                 if (test === -1) {
@@ -27,6 +28,7 @@ exports.run = (client, message, args) => {
                         if (err) { throw err }
                     })
                 }
+                checker(row['xp'], row['lvl'], row['atk'], row['def'], row['sp'], message.author.username);
             };
         }
     })

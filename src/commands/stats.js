@@ -15,18 +15,21 @@ exports.run = (client, message, args) => {
                 .setTitle(`Stats for ${message.author.username}`)
                 .setDescription('Some description here')
                 .addFields(
-                    { name: 'lvl', value: `${user['[object Object]']['lvl']}` },
+                    { name: 'lvl', value: `${user['[object Object]']['lvl']}`, inline: true },
+                    {
+                        name: 'xp', value: `${user['[object Object]']['xp']}/${(user['[object Object]']['lvl'] * 5000)}`, inline: true
+                    },
                     { name: 'class :briefcase:', value: `${user['[object Object]']['class']}` },
                     {
-                        name: 'hp :heart:', value: `${user['[object Object]']['hp']}/${user['[object Object]']['mh']}`
+                        name: 'hp :heart:', value: `${user['[object Object]']['hp']} / ${user['[object Object]']['mh']}`
                     },
                     { name: 'weapon', value: `${user['[object Object]']['weapon']}`, inline: true },
                     { name: 'atk', value: `${user['[object Object]']['atk']}`, inline: true },
                     { name: 'energy', value: `${user['[object Object]']['energy']}` },
                     { name: 'armor', value: `${user['[object Object]']['armor']}`, inline: true },
                     { name: 'def', value: `${user['[object Object]']['def']}`, inline: true },
-                    { name: 'skill points', value: `${user['[object Object]']['sp']}` },
-                    { name: 'xp', value: `${user['[object Object]']['xp']}` }
+                    { name: 'skill points', value: `${user['[object Object]']['sp']}` }
+
                 )
                 .setFooter('Provided generously by the team working on this bot (https://github.com/MrRandom31/Discord-Bot)');
             message.channel.send(stats);

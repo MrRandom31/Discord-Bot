@@ -12,7 +12,7 @@ exports.run = (client, message, args) => {
     let users = db.get("SELECT class FROM users WHERE username = ?", [message.author.username], (err, row) => {
         if (row == undefined) {
             message.channel.send("Welcome adventurer to the discord mmorpg Bot! \nnow, to get started you will need to select a class! \n(Type the number to select your class!) \n1: Mage | 2: Warrior | 3: Archer | 4: Assassin | 5: Healer").catch(console.error);
-            message.channel.awaitMessages(m => m.author.id == message.author.id, { max: 1, time: 15000, errors: ['time'] })
+            message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, time: 15000, errors: ['time'] })
                 .then(collected => {
                     if (classes[collected.first().content] != undefined) {
                         let c = classes[collected.first().content];

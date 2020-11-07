@@ -1,4 +1,3 @@
-let checker = require('../leveler.js');
 let get_db = require("../data.js");
 exports.run = (client, message, args) => {
     let db = get_db('game.db');
@@ -14,7 +13,7 @@ exports.run = (client, message, args) => {
                     let anum = num;
                     let xp = Math.ceil(Math.random() * 25) * num;
                     let sql = "UPDATE users SET xp = ?, inv = ? WHERE username = ?";
-                    message.channel.send(`${message.author.username} caught ${num} fish\nEarned ${xp}xp`);
+                    message.channel.send(`${message.author} caught ${num} fish\nEarned ${xp}xp`);
                     db.run(sql, [xp + row['xp'], [`${anum} fish` + row['inv'].slice(test + 4)], message.author.username], (err) => {
                         if (err) { throw err }
                     })
@@ -23,12 +22,11 @@ exports.run = (client, message, args) => {
                     let anum = parseInt(fish) + num;
                     let xp = Math.ceil(Math.random() * 25) * num;
                     let sql = "UPDATE users SET xp = ?, inv = ? WHERE username = ?";
-                    message.channel.send(`${message.author.username} caught ${num} fish\nEarned ${xp}xp`);
+                    message.channel.send(`${message.author} caught ${num} fish\nEarned ${xp}xp`);
                     db.run(sql, [xp + row['xp'], [`${anum} fish` + row['inv'].slice(test + 4)], message.author.username], (err) => {
                         if (err) { throw err }
                     })
                 }
-                checker(row['xp'], row['lvl'], row['atk'], row['def'], row['sp'], message.author.username);
             };
         }
     })
